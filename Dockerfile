@@ -9,11 +9,10 @@ RUN curl -sL https://cli.nylas.com/download/latest/linux_amd64 | tar -xvz -C /us
 
 FROM builder AS nylas
 
-COPY .env /mnt/
-COPY authenticate.sh .
-COPY webhooks.sh .
+WORKDIR /app
 
-RUN chmod +x authenticate.sh
-RUN chmod +x webhooks.sh
+COPY init.sh .
 
-CMD ["./authenticate.sh && ./webhooks.sh"]
+RUN chmod +x init.sh
+
+CMD ["sh", "init.sh"]
