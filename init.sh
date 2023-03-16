@@ -7,4 +7,6 @@ EOF
 
 sleep 5
 
-nylas webhook tunnel -f $WEBHOOK_URL
+while true; do
+  nylas webhook tunnel -f $WEBHOOK_URL
+done
