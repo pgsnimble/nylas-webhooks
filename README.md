@@ -7,25 +7,29 @@ receive webhook events from Nylas.
 
 ## Getting started
 
-First of all, you need to create a `.env` file in the root of the project with the following content:
+You can build it by your own or use the image from Docker Hub.
 
 ```bash
-NYLAS_CLIENT_SECRET='NYLAS S'
-NYLAS_CLIENT_ID='NYLAS CLIENT ID'
-WEBHOOK_URL='SERVER THAT WILL BE RECEIVING THE EVENTS'
-```
-
-Then, you can run the following command to build the image:
-
-```bash
-docker build -t nylas-webhook .
+docker build . -t <your_user/image_name>
 ```
 
 Finally, you can run the image with the following command:
 
 ```bash
-docker run -p 3000:3000 nylas-webhook
+docker run -p -e NYLAS_CLIENT_ID= -e NYLAS_CLIENT_SECRET= -e WEBHOOK_URL nylas-webhook
 ```
 
+or using Docker Compose:
+
+```yaml
+nylas-webhooks:
+  image: pgsnimble/nylas-webhooks:latest
+  environment:
+    NYLAS_CLIENT_ID:
+    NYLAS_CLIENT_SECRET: 
+    WEBHOOK_URL: 
+  links:
+    - {NAME OF CONTAINER THAT WILL BE RECEIVING THE WEBHOOKS}
+```
 
 [Nylas]: https://www.nylas.com/
